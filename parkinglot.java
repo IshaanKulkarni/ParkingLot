@@ -1,178 +1,408 @@
-import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
 import java.sql.Timestamp;
-
-public class parkinglot{
+public class Team12{
     public static void main(String[] args){
-        Bike b1=new Bike();
-        Arrays.fill(b1.Spots,false);
-        Arrays.fill(b1.Handicapped,false);
+        Bike B=new Bike();
+        ElectricCar EC=new ElectricCar();
+        Heavy H=new Heavy();
+        Arrays.fill(B.Spotsfilled,false);
+        Arrays.fill(B.HandicappedSpotsfilled,false);
+        Arrays.fill(EC.Spotsfilled,false);
+        Arrays.fill(EC.HandicappedSpotsfilled,false);
+        Arrays.fill(H.Spotsfilled,false);
+        Arrays.fill(H.HandicappedSpotsfilled,false);
         Scanner sc=new Scanner(System.in);
-        for(int i=0;i<=10000;i++){
-        System.out.println("Welcome to the Parking Lot!");
-        System.out.println("Do you need a handicapped spot?(1-YES/2-NO)");
-        int handicapped=sc.nextInt();
-        System.out.println("Please select an option from the below menu:");
-        System.out.println("1-Park a vehicle");
-        System.out.println("2-Remove your vehicle");
-        int a=sc.nextInt();
-        if(a==2){
-            if(handicapped==2){
-            System.out.println("Please enter your spot/token number::");
-            int token=sc.nextInt();
-            if(b1.Spots[token]==true){
-            b1.Remove(token);
-            System.out.println("Your bill amounts to:: "+b1.Calculate(token));
-            b1.Pay();
-            int b=sc.nextInt();
-            if(b==1||b==2){
-                b1.Payed(b);
-            }
-            else{
-                System.out.println("Please enter a valid payment method:1 or 2: ");
-                int c=sc.nextInt();
-                b1.Payed(c);
-
-            }
-        
-        }
-        else{
-            System.out.println("No Vehicle parked here as of now!");
-        }
-    }
-
-    if(handicapped==1){
-        System.out.println("Please enter your spot/token number::");
-            int token=sc.nextInt();
-            if(b1.Handicapped[token]==true){
-            b1.Hremove(token);
-            System.out.println("Your bill amounts to:: "+b1.Calculate(token));
-            b1.Pay();
-            int b=sc.nextInt();
-            if(b==1||b==2){
-                b1.Payed(b);
-            }
-            else{
-                System.out.println("Please enter a valid payment method:1 or 2: ");
-                int c=sc.nextInt();
-                b1.Payed(c);
-
-            }
-        
-        }
-        else{
-            System.out.println("No Vehicle parked here as of now!");
-        }
-    }
-
-}
-
-        if(a==1){
-            if(handicapped==2){
-            System.out.println("Please Enter your vehicle type: ");
-            System.out.println("1.Bike");
-
-            int k=sc.nextInt();
-            if(k==1){
-                System.out.println("Please enter your bike number:");
-                String s=sc.next();
-                b1.Park(s);
-                if(b1.Park(s)>=0){
-                System.out.println("Your bike has been parked. The spot number is: "+b1.Park(s));
-                System.out.println("Please remember this number for all future references. Same has been printed on the token!");
-                b1.settime(b1.Park(s));
+        System.out.println("Please enter the type of vehicle");
+        String s=sc.nextLine();
+        while(!s.equals("ExitTheProcess")){
+            if(s.equals("Bike")){
+                System.out.println("Welcome to the Parking Lot!");
+                System.out.println("Do you need a handicapped spot?(1-YES/2-NO)");
+                int handicapped=sc.nextInt();
+                System.out.println("Please select an option from the below menu:");
+                System.out.println("1-Park a vehicle");
+                System.out.println("2-Remove your vehicle");
+                int a=sc.nextInt();
+                sc.nextLine();
+                if(a==1){
+                    if(handicapped==1){
+                      System.out.println("Please Enter your Vehicle Number");
+                      String VehicleNumber=sc.nextLine();
+                      int j=B.HandicappedPark(VehicleNumber);
+                      if(j==-1){
+                          System.out.println("Slots are Full");
+                      }
+                      else{
+                          System.out.println("Your vehicle is successfully parked at:"+(j+1)+"th spot");
+                          System.out.println("Please rememebr the spot number for all future references. The same has been printed on your token!");
+                      }
+                      System.out.println("Please enter the type of vehicle");
+                    }
+                    else{
+                        System.out.println("Please Enter your Vehicle Number");
+                        String VehicleNumber=sc.nextLine();
+                        int j=B.Park(VehicleNumber);
+                        if(j==-1){
+                            System.out.println("Slots are Full");
+                        }
+                        else{
+                            System.out.println("Your vehicle is successfully parked at:"+(j+1)+"th spot");
+                        }
+                        System.out.println("Please enter the type of vehicle");
+                    }
+                    
                 }
                 else{
-                    System.out.println("Sorry Lot full!");
-                }
-            }
-        }
-    
-    if(handicapped==1){
-        System.out.println("Please Enter your vehicle type: ");
-            System.out.println("1.Bike");
+                    if(handicapped==1){
+                        System.out.println("Please Enter your Vehicle Number");
+                        String VehicleNumber=sc.nextLine();
+                         int k=B.HandicappedRemove(VehicleNumber);
+                         if(k==-1){
+                             System.out.println("There is no vehicle with that number");
+                             System.out.println("Please Enter type of Vehicle");
+                             s=sc.nextLine();
+                             continue;
+                         }
+                         
+                         long HandicappedCaluclate=B.HandicappedCaluclate(k);
+                        B.Pay();
+                        int l=sc.nextInt();
+                        if(l==1||l==2){
+                            System.out.println("Amount to be paid:"+(HandicappedCaluclate));
+                        }
+                        else{
+                            System.out.println("Please enter a valid paying method");
+                             int m=sc.nextInt();
+                            if(m==1||m==2){
+                                System.out.println("Amount to be paid:"+(HandicappedCaluclate));
+                            }
 
-            int k=sc.nextInt();
-            if(k==1){
-                System.out.println("Please enter your bike number:");
-                String s=sc.next();
-                b1.Hpark(s);
-                if(b1.Hpark(s)>=0){
-                System.out.println("Your bike has been parked. The spot number is: "+b1.Hpark(s));
-                System.out.println("Please remember this number for all future references. Same has been printed on the token!");
-                b1.Hsettime(b1.Park(s));
+                        }
+                        System.out.println("Please enter the type of vehicle");
+                    }
+                    else{
+                        System.out.println("Please Enter your Vehicle Number");
+                        String VehicleNumber=sc.nextLine();
+                         int k=B.Remove(VehicleNumber);
+                         if(k==-1){
+                             System.out.println("There is no vehicle with that number");
+                             System.out.println("Please Enter type of Vehicle");
+                             s=sc.nextLine();
+                             continue;
+                         }
+                        long Caluclate=B.Caluclate(k);
+                        B.Pay();
+                        int l=sc.nextInt();
+                        if(l==1||l==2){
+                            System.out.println("Amount to be paid:"+(Caluclate));
+                        }
+                        else{
+                            System.out.println("Please enter a valid paying method");
+                             int m=sc.nextInt();
+                            if(m==1||m==2){
+                                System.out.println("Amount to be paid:"+(Caluclate));
+                            }
+                        }
+                        System.out.println("Please enter the type of vehicle");
+                    }
+                }
+                
+            }
+            else if(s.equals("ElectricCar")){
+                System.out.println("Welcome to the Parking Lot!");
+                System.out.println("Do you need a handicapped spot?(1-YES/2-NO)");
+                int handicapped=sc.nextInt();
+                System.out.println("Please select an option from the below menu:");
+                System.out.println("1-Park a vehicle");
+                System.out.println("2-Remove your vehicle");
+                int a=sc.nextInt();
+                sc.nextLine();
+                if(a==1){
+                    if(handicapped==1){
+                      System.out.println("Please Enter your Vehicle Number");
+                      String VehicleNumber=sc.nextLine();
+                      int j=EC.HandicappedPark(VehicleNumber);
+                      if(j==-1){
+                          System.out.println("Slots are Full");
+                      }
+                      else{
+                          System.out.println("Your vehicle is successfully parked at:"+(j+1)+"th spot");
+                          System.out.println("Please remember your slot number for all future references. Same has been printed on your token!");
+                      }
+                      System.out.println("Please enter the type of vehicle");
+                    }
+                    else{
+                        System.out.println("Please Enter your Vehicle Number");
+                        String VehicleNumber=sc.nextLine();
+                        int j=EC.Park(VehicleNumber);
+                        if(j==-1){
+                            System.out.println("Slots are Full");
+                        }
+                        else{
+                            System.out.println("Your vehicle is successfully parked at:"+(j+1)+"th spot");
+                        }
+                        System.out.println("Please enter the type of vehicle");
+                    }
                 }
                 else{
-                    System.out.println("Sorry Lot full!");
-                }
-            }
-    }
-    }
-}
-}
-}
+                    if(handicapped==1){
+                        System.out.println("Please Enter your Vehicle Number");
+                        String VehicleNumber=sc.nextLine();
+                         int k=EC.HandicappedRemove(VehicleNumber);
+                         if(k==-1){
+                             System.out.println("There is no vehicle with that number");
+                             System.out.println("Please Enter type of Vehicle");
+                             s=sc.nextLine();
+                             continue;
+                         }
+                         System.out.println("Please enter the time for charging");
+                         int time=sc.nextInt();
+                         long HandicappedChargingFare= EC.HandicappedChargingFare(k, time);
+                         long HandicappedCaluclate=EC.HandicappedCaluclate(k);
+                        EC.Pay();
+                        int l=sc.nextInt();
+                        if(l==1||l==2){
+                            System.out.println("Amount to be paid:"+(HandicappedCaluclate+HandicappedChargingFare));
+                        }
+                        else{
+                            System.out.println("Please enter a valid paying method");
+                             int m=sc.nextInt();
+                            if(m==1||m==2){
+                                System.out.println("Amount to be paid:"+(HandicappedCaluclate+HandicappedChargingFare));
+                            }
 
+                        }
+                        System.out.println("Please enter the type of vehicle");
+                    }
+                    else{
+                        System.out.println("Please Enter your Vehicle Number");
+                        String VehicleNumber=sc.nextLine();
+                         int k=EC.Remove(VehicleNumber);
+                         if(k==-1){
+                             System.out.println("There is no vehicle with that number");
+                             System.out.println("Please Enter type of Vehicle");
+                             s=sc.nextLine();
+                             continue;
+                         }
+                         System.out.println("Please enter the time for charging");
+                        int time=sc.nextInt();
+                         long ChargingFare= EC.ChargingFare(k, time);
+                        long Caluclate=EC.Caluclate(k);
+                        EC.Pay();
+                        int l=sc.nextInt();
+                        if(l==1||l==2){
+                            System.out.println("Amount to be paid:"+(Caluclate+ChargingFare));
+                        }
+                        else{
+                            System.out.println("Please enter a valid paying method");
+                             int m=sc.nextInt();
+                            if(m==1||m==2){
+                                System.out.println("Amount to be paid:"+(Caluclate+ChargingFare));
+                            }
+                        }
+                    }
+                    System.out.println("Please enter the type of vehicle");
+                }
+                
+            }
+
+            else if(s.equals("Heavy Vehicle")){
+                System.out.println("Welcome to the Parking Lot!");
+                System.out.println("Do you need a handicapped spot?(1-YES/2-NO)");
+                int handicapped=sc.nextInt();
+                System.out.println("Please select an option from the below menu:");
+                System.out.println("1-Park a vehicle");
+                System.out.println("2-Remove your vehicle");
+                int a=sc.nextInt();
+                sc.nextLine();
+                if(a==1){
+                    if(handicapped==1){
+                      System.out.println("Please Enter your Vehicle Number");
+                      String VehicleNumber=sc.nextLine();
+                      int j=H.HandicappedPark(VehicleNumber);
+                      if(j==-1){
+                          System.out.println("Slots are Full");
+                      }
+                      else{
+                          System.out.println("Your vehicle is successfully parked at:"+(j+1)+"th spot");
+                          System.out.println("Please remember your soly number for all future references. Same is printed on your token!");
+                      }
+                      System.out.println("Please enter the type of vehicle");
+                    }
+                    else{
+                        System.out.println("Please Enter your Vehicle Number");
+                        String VehicleNumber=sc.nextLine();
+                        int j=H.Park(VehicleNumber);
+                        if(j==-1){
+                            System.out.println("Slots are Full");
+                        }
+                        else{
+                            System.out.println("Your vehicle is successfully parked at:"+(j+1)+"th spot");
+                        }
+                        System.out.println("Please enter the type of vehicle");
+                    }
+                    
+                }
+                else{
+                    if(handicapped==1){
+                        System.out.println("Please Enter your Vehicle Number");
+                        String VehicleNumber=sc.nextLine();
+                         int k=H.HandicappedRemove(VehicleNumber);
+                         if(k==-1){
+                             System.out.println("There is no vehicle with that number");
+                             System.out.println("Please Enter type of Vehicle");
+                             s=sc.nextLine();
+                             continue;
+                         }
+                         
+                         long HandicappedCaluclate=H.HandicappedCaluclate(k);
+                        H.Pay();
+                        int l=sc.nextInt();
+                        if(l==1||l==2){
+                            System.out.println("Amount to be paid:"+(HandicappedCaluclate));
+                        }
+                        else{
+                            System.out.println("Please enter a valid paying method");
+                             int m=sc.nextInt();
+                            if(m==1||m==2){
+                                System.out.println("Amount to be paid:"+(HandicappedCaluclate));
+                            }
+
+                        }
+                        System.out.println("Please enter the type of vehicle");
+                    }
+                    else{
+                        System.out.println("Please Enter your Vehicle Number");
+                        String VehicleNumber=sc.nextLine();
+                         int k=H.Remove(VehicleNumber);
+                         if(k==-1){
+                             System.out.println("There is no vehicle with that number");
+                             System.out.println("Please Enter type of Vehicle");
+                             s=sc.nextLine();
+                             continue;
+                         }
+                        long Caluclate=H.Caluclate(k);
+                        H.Pay();
+                        int l=sc.nextInt();
+                        if(l==1||l==2){
+                            System.out.println("Amount to be paid:"+(Caluclate));
+                        }
+                        else{
+                            System.out.println("Please enter a valid paying method");
+                             int m=sc.nextInt();
+                            if(m==1||m==2){
+                                System.out.println("Amount to be paid:"+(Caluclate));
+                            }
+                        }
+                        System.out.println("Please enter the type of vehicle");
+                    }
+                }
+                
+            }
+           
+            s=sc.nextLine();
+        }
+
+
+    }
+}
 interface Floor{
     public int Park(String s);
-    public void settime(int i);
-    public void Remove(int i);
-    public long Calculate(int i);
+    public int HandicappedPark(String s);
+    public int Remove(String s);
+    public int HandicappedRemove(String s);
     public void Pay();
-    public void Payed(int i);
+    public long Caluclate(int i);
+    public long HandicappedCaluclate(int i);
 }
 
 class Bike implements Floor{
-    Timestamp ts1=Timestamp.valueOf("2021-09-01 09:01:16");
-    int spots=100;
-    int hspots=20;
-    boolean Spots[]=new boolean[spots];
-    boolean Handicapped[]=new boolean[hspots];
-    long intime[]=new long [spots];
-    long outtime[]=new long [spots];
-    long hintime[]=new long [hspots];
-    long houttime[]=new long [hspots];
+    Timestamp time =new Timestamp(0);
+    static int spots=100;
+    static int handicappedspots=20;
+    public Boolean Spotsfilled[]=new Boolean[spots];
+    public Boolean HandicappedSpotsfilled[]=new Boolean[handicappedspots];
+    public static String VehicleNumber[]=new String[spots];
+    public static String HandicappedVehicleNumber[]=new String[handicappedspots];
+    public Timestamp EnteringTime[]=new Timestamp[spots];
+    public Timestamp LeavingTime[]=new Timestamp[spots];
+    public Timestamp HandicappedEnteringTime[] =new Timestamp[handicappedspots];
+    public Timestamp HandicappedLeavingTime[]=new Timestamp[handicappedspots];
     public int Park(String s){
         for(int i=0;i<spots;i++){
-            if(Spots[i]==false){
-                Spots[i]=true;
+            if(!Spotsfilled[i]){
+                  Spotsfilled[i]=true;
+                  VehicleNumber[i]=s;
+                  EnteringTime[i]=new Timestamp(System.currentTimeMillis());
+                  return i;
+            }
+
+        }
+        return -1;
+    }
+    public int HandicappedPark(String s){
+        for(int i=0;i<handicappedspots;i++){
+            if(!HandicappedSpotsfilled[i]){
+                HandicappedSpotsfilled[i]=true;
+                HandicappedVehicleNumber[i]=s;
+                HandicappedEnteringTime[i]=new Timestamp(System.currentTimeMillis());
+                return i;
+            }
+            
+        }
+        return -1;
+    }
+    public int Remove(String s){
+        for(int i=0;i<spots;i++){
+            if(s.equals(VehicleNumber[i])){
+                Spotsfilled[i]=false;
+                LeavingTime[i]=new Timestamp(System.currentTimeMillis());
                 return i;
             }
         }
         return -1;
     }
-    public int Hpark(String s){
-        for(int i=0;i<=hspots;i++){
-        if(Handicapped[i]==false){
-            Handicapped[i]=true;
-            return i;
+    public int HandicappedRemove(String s){
+        for(int i=0;i<handicappedspots;i++){
+            if(s.equals(HandicappedVehicleNumber[i])){
+                HandicappedSpotsfilled[i]=false;
+                HandicappedLeavingTime[i]=new Timestamp(System.currentTimeMillis());
+                return i;
+            }
         }
-    }
         return -1;
     }
-    public void Remove(int i){
-        outtime[i]=ts1.getTime();
-        Spots[i]=false;
-        System.out.println("Your car has been successfully unparked!");
-    }
-    public void Hremove(int i){
-        houttime[i]=ts1.getTime();
-        Handicapped[i]=false;
-        System.out.println("Your car has been successfully unparked!");
-    }
-    public long Calculate(int i){
-        long time=((outtime[i]-intime[i])/1000);
+    
+    public long Caluclate(int i){
+        System.out.println("Bike entered the parking lot at:" +EnteringTime[i]);
+        System.out.println("Bike left the parking lot at:" +LeavingTime[i]);
+         long timespan=(LeavingTime[i].getTime()-EnteringTime[i].getTime())/1000;
         long cost=0;
-        if(time==1){
+        if(timespan==1){
             cost=10;
         }
-        if(time==2){
+        if(timespan==2){
             cost=17;
         }
-        if(time>2){
-            cost=17+5*(time-2);
+        if(timespan>2){
+            cost=17+5*(timespan-2);
+        }
+
+        return cost;
+    }
+    public long HandicappedCaluclate(int i){
+        System.out.println("Bike entered the parking lot at:" +HandicappedEnteringTime[i]);
+        System.out.println("Bike left the parking lot at:" +HandicappedLeavingTime[i]);
+          long timespan=(HandicappedLeavingTime[i].getTime()-HandicappedEnteringTime[i].getTime())/1000;
+        long cost=0;
+        if(timespan==1){
+            cost=10;
+        }
+        if(timespan==2){
+            cost=17;
+        }
+        if(timespan>2){
+            cost=17+5*(timespan-2);
         }
 
         return cost;
@@ -182,18 +412,219 @@ class Bike implements Floor{
         System.out.println("Credit/Delit card-1");
         System.out.println("Cash-2");
     }
-    public void Payed(int i){
-        if(i==1||i==2){
-            System.out.println("Payment done successfully!");
+    
+}
+
+class ElectricCar implements Floor
+{
+    Timestamp time =new Timestamp(0);
+    static int spots=50;
+    static int handicappedspots=10;
+    public Boolean Spotsfilled[]=new Boolean[spots];
+    public Boolean HandicappedSpotsfilled[]=new Boolean[handicappedspots];
+    public static String VehicleNumber[]=new String[spots];
+    public static String HandicappedVehicleNumber[]=new String[handicappedspots];
+    public Timestamp EnteringTime[]=new Timestamp[spots];
+    public Timestamp LeavingTime[]=new Timestamp[spots];
+    public Timestamp HandicappedEnteringTime[] =new Timestamp[handicappedspots];
+    public Timestamp HandicappedLeavingTime[]=new Timestamp[handicappedspots];
+    public int Park(String s){
+        for(int i=0;i<spots;i++){
+            if(!Spotsfilled[i]){
+                  Spotsfilled[i]=true;
+                  VehicleNumber[i]=s;
+                  EnteringTime[i]=new Timestamp(System.currentTimeMillis());
+                  return i;
+            }
+
         }
-        else{
-            System.out.println("Please enter a valid paying method!");
+        return -1;
+    }
+    public int HandicappedPark(String s){
+        for(int i=0;i<handicappedspots;i++){
+            if(!HandicappedSpotsfilled[i]){
+                HandicappedSpotsfilled[i]=true;
+                HandicappedVehicleNumber[i]=s;
+                HandicappedEnteringTime[i]=new Timestamp(System.currentTimeMillis());
+                return i;
+            }
+            
         }
+        return -1;
     }
-    public void settime(int i){
-        intime[i]=ts1.getTime();
+    public int Remove(String s){
+        for(int i=0;i<spots;i++){
+            if(s.equals(VehicleNumber[i])){
+                Spotsfilled[i]=false;
+                LeavingTime[i]=new Timestamp(System.currentTimeMillis());
+                return i;
+            }
+        }
+        return -1;
     }
-    public void Hsettime(int i){
-        hintime[i]=ts1.getTime();
+    public int HandicappedRemove(String s){
+        for(int i=0;i<handicappedspots;i++){
+            if(s.equals(HandicappedVehicleNumber[i])){
+                HandicappedSpotsfilled[i]=false;
+                HandicappedLeavingTime[i]=new Timestamp(System.currentTimeMillis());
+                return i;
+            }
+        }
+        return -1;
+    }
+    public void Pay(){
+        System.out.println("Please select an option to pay!");
+        System.out.println("Credit/Debit card-1");
+        System.out.println("Cash-2");
+
+    }
+    public long Caluclate(int i){
+        System.out.println("Electric Car entered the parking lot at:" +EnteringTime[i]);
+        System.out.println("Electric Car left the parking lot at:" +LeavingTime[i]);
+         long timespan=(LeavingTime[i].getTime()-EnteringTime[i].getTime())/1000;
+        long cost=0;
+        if(timespan==1){
+            cost=15;
+        }
+        if(timespan==2){
+            cost=25;
+        }
+        if(timespan>2){
+            cost=25+5*(timespan-2);
+        }
+
+        return cost;
+    }
+    public long HandicappedCaluclate(int i){
+        System.out.println("Electric Car entered the parking lot at:" +HandicappedEnteringTime[i]);
+        System.out.println("Electric Car left the parking lot at:" +HandicappedLeavingTime[i]);
+          long timespan=(HandicappedLeavingTime[i].getTime()-HandicappedEnteringTime[i].getTime())/1000;
+        long cost=0;
+        if(timespan==1){
+            cost=12;
+        }
+        if(timespan==2){
+            cost=20;
+        }
+        if(timespan>2){
+            cost=20+4*(timespan-2);
+        }
+
+        return cost;
+    }
+    public long HandicappedChargingFare(int i,int time){
+        long timespan=(HandicappedLeavingTime[i].getTime()-HandicappedEnteringTime[i].getTime())/1000;
+        if(time>timespan){
+            return timespan*10;
+        }
+            return time*10;
+    }
+    public long ChargingFare(int i,int time){
+        long timespan=(LeavingTime[i].getTime()-EnteringTime[i].getTime())/1000;
+        if(time>timespan){
+            return timespan*10;
+        }
+            return time*10;
     }
 }
+
+    class Heavy implements Floor{
+        Timestamp time =new Timestamp(0);
+        static int spots=100;
+        static int handicappedspots=20;
+        public Boolean Spotsfilled[]=new Boolean[spots];
+        public Boolean HandicappedSpotsfilled[]=new Boolean[handicappedspots];
+        public static String VehicleNumber[]=new String[spots];
+        public static String HandicappedVehicleNumber[]=new String[handicappedspots];
+        public Timestamp EnteringTime[]=new Timestamp[spots];
+        public Timestamp LeavingTime[]=new Timestamp[spots];
+        public Timestamp HandicappedEnteringTime[] =new Timestamp[handicappedspots];
+        public Timestamp HandicappedLeavingTime[]=new Timestamp[handicappedspots];
+        public int Park(String s){
+            for(int i=0;i<spots;i++){
+                if(!Spotsfilled[i]){
+                      Spotsfilled[i]=true;
+                      VehicleNumber[i]=s;
+                      EnteringTime[i]=new Timestamp(System.currentTimeMillis());
+                      return i;
+                }
+    
+            }
+            return -1;
+        }
+        public int HandicappedPark(String s){
+            for(int i=0;i<handicappedspots;i++){
+                if(!HandicappedSpotsfilled[i]){
+                    HandicappedSpotsfilled[i]=true;
+                    HandicappedVehicleNumber[i]=s;
+                    HandicappedEnteringTime[i]=new Timestamp(System.currentTimeMillis());
+                    return i;
+                }
+                
+            }
+            return -1;
+        }
+        public int Remove(String s){
+            for(int i=0;i<spots;i++){
+                if(s.equals(VehicleNumber[i])){
+                    Spotsfilled[i]=false;
+                    LeavingTime[i]=new Timestamp(System.currentTimeMillis());
+                    return i;
+                }
+            }
+            return -1;
+        }
+        public int HandicappedRemove(String s){
+            for(int i=0;i<handicappedspots;i++){
+                if(s.equals(HandicappedVehicleNumber[i])){
+                    HandicappedSpotsfilled[i]=false;
+                    HandicappedLeavingTime[i]=new Timestamp(System.currentTimeMillis());
+                    return i;
+                }
+            }
+            return -1;
+        }
+        
+        public long Caluclate(int i){
+            System.out.println("Heavy_Vehicle entered the parking lot at:" +EnteringTime[i]);
+            System.out.println("Heavy_Vehicle left the parking lot at:" +LeavingTime[i]);
+             long timespan=(LeavingTime[i].getTime()-EnteringTime[i].getTime())/1000;
+            long cost=0;
+            if(timespan==1){
+                cost=10;
+            }
+            if(timespan==2){
+                cost=17;
+            }
+            if(timespan>2){
+                cost=17+5*(timespan-2);
+            }
+    
+            return cost;
+        }
+        public long HandicappedCaluclate(int i){
+            System.out.println("Heavy Vehicle entered the parking lot at:" +HandicappedEnteringTime[i]);
+            System.out.println("Heavy Vehicle left the parking lot at:" +HandicappedLeavingTime[i]);
+              long timespan=(HandicappedLeavingTime[i].getTime()-HandicappedEnteringTime[i].getTime())/1000;
+            long cost=0;
+            if(timespan==1){
+                cost=10;
+            }
+            if(timespan==2){
+                cost=17;
+            }
+            if(timespan>2){
+                cost=17+5*(timespan-2);
+            }
+    
+            return cost;
+        }
+        public void Pay(){
+            System.out.println("Please chose an option to pay!");
+            System.out.println("Credit/Delit card-1");
+            System.out.println("Cash-2");
+        }
+        
+    }
+
+    
