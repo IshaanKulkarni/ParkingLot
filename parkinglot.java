@@ -1,6 +1,6 @@
 import java.util.*;
 import java.sql.Timestamp;
-public class parkinglot{
+public class Team12{
     public static void main(String[] args){
         Bike B=new Bike();
         ElectricCar EC=new ElectricCar();
@@ -37,7 +37,7 @@ public class parkinglot{
                       }
                       else{
                           System.out.println("Your vehicle is successfully parked at:"+(j+1)+"th spot");
-                          System.out.println("Please rememebr the spot number for all future references. The same has been printed on your token!");
+                          System.out.println("Please remember the spot number for all future references. The same has been printed on your token!");
                       }
                       System.out.println("Please enter the type of vehicle");
                     }
@@ -203,8 +203,9 @@ public class parkinglot{
                                 System.out.println("Amount to be paid:"+(Caluclate+ChargingFare));
                             }
                         }
+                        System.out.println("Please enter the type of vehicle");
                     }
-                    System.out.println("Please enter the type of vehicle");
+                    
                 }
                 
             }
@@ -393,6 +394,7 @@ public class parkinglot{
                         }
                         System.out.println("Please enter the type of vehicle");
                     }
+                    
                 }
                 
             }
@@ -718,7 +720,7 @@ class ElectricCar implements Floor
         }
         public void Pay(){
             System.out.println("Please chose an option to pay!");
-            System.out.println("Credit/Delit card-1");
+            System.out.println("Credit/Debit card-1");
             System.out.println("Cash-2");
         }
         
@@ -818,10 +820,8 @@ class ElectricCar implements Floor
         }
         public void Pay(){
             System.out.println("Please chose an option to pay!");
-            System.out.println("Credit/Delit card-1");
+            System.out.println("Credit/Debit card-1");
             System.out.println("Cash-2");
         }
         
     }
-
-    
