@@ -1,6 +1,6 @@
 import java.util.*;
 import java.sql.Timestamp;
-public class Team12{
+public class parkinglot{
     public static void main(String[] args){
         Bike B=new Bike();
         ElectricCar EC=new ElectricCar();
@@ -409,7 +409,7 @@ class Bike implements Floor{
     }
     public void Pay(){
         System.out.println("Please chose an option to pay!");
-        System.out.println("Credit/Delit card-1");
+        System.out.println("Credit/Debit card-1");
         System.out.println("Cash-2");
     }
     
