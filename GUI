@@ -1,0 +1,404 @@
+package info.java;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.jar.JarEntry;
+
+public class Main {
+
+    public static void main(String[] args) {
+        MyFrame myFrame = new MyFrame();
+
+
+    }
+}
+
+class MyFrame extends JFrame implements ActionListener {
+    JFrame jFrame;
+    JButton jButton;
+    ImageIcon parking = new ImageIcon("C:\\Users\\avlab\\Desktop\\icon.png");
+
+    MyFrame(){
+        jFrame = new JFrame();
+        jFrame.setSize(350,500);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setLayout(new FlowLayout());
+        jFrame.getContentPane().setBackground(new Color(0));
+        jFrame.setResizable(false);
+        JLabel jLabel = new JLabel("HI.....");
+        JLabel jLabel2 = new JLabel("WELCOME TO OUR");
+        JLabel jLabel3 = new JLabel("PARKING LOT!!");
+        JLabel jLabel4 = new JLabel("MADE BY GROUP 12 BOIIS");
+        JPanel jPanel = new JPanel();
+        jPanel.setBackground(Color.BLACK);
+        jPanel.setPreferredSize(new Dimension(300,200));
+
+        jLabel.setFont(new Font("Consolas",Font.BOLD,30));
+        jLabel.setForeground(new Color(0x00FF00));
+        jLabel2.setFont(new Font("Consolas",Font.BOLD,30));
+        jLabel2.setForeground(new Color(0x00FF00));
+        jLabel3.setFont(new Font("Consolas",Font.BOLD,30));
+        jLabel3.setForeground(new Color(0x00FF00));
+        jLabel4.setFont(new Font("Consolas",Font.BOLD,20));
+        jLabel4.setForeground(new Color(0x00FF00));
+
+        JButton jButton = new JButton("PROCEED");
+        jButton.setFont(new Font("Consolas",Font.BOLD,20));
+        jButton.setBackground(new Color(0x3ADED2));
+        jButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jFrame.dispose();
+                ChooseWindow chooseWindow = new ChooseWindow();
+            }
+        });
+
+        jFrame.add(jLabel);
+        jFrame.add(jLabel2);
+        jFrame.add(jLabel3);
+        jFrame.add(jLabel4);
+        jFrame.add(jPanel);
+        jFrame.add(jButton);
+        jFrame.setVisible(true);
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+}
+
+class ChooseWindow implements ActionListener{
+    JLabel label1 = new JLabel();
+    JLabel label2 = new JLabel();
+    JCheckBox checkBox1 = new JCheckBox();
+    JCheckBox checkBox2 = new JCheckBox();
+    JFrame jFrame = new JFrame();
+    JButton jButton;
+
+    ChooseWindow(){
+        jFrame.setVisible(true);
+        jFrame.setSize(500,500);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setLayout(null);
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(checkBox1);
+        buttonGroup.add(checkBox2);
+
+        checkBox1.setText("I would like to park my vehicle");
+        checkBox2.setText("I would like to unpark my vehicle");
+        checkBox1.setBackground(new Color(0x0));
+        checkBox1.setForeground(new Color(0x00FF00F));
+        checkBox1.setFocusable(false);
+        checkBox2.setBackground(new Color(0x0));
+        checkBox2.setForeground(new Color(0x00FF00F));
+        checkBox2.setFocusable(false);
+        checkBox1.setBounds(0,10,500,40);
+        checkBox2.setBounds(0,70,500,40);
+
+        JButton jButton = new JButton("CONFIRM");
+        jButton.setBounds(160,400,150,30);
+        jButton.setFont(new Font("Consolas",Font.BOLD,20));
+        jButton.setBackground(new Color(0x3ADED2));
+
+        jButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(checkBox1.isSelected()){
+                    Park park = new Park();
+                    jFrame.dispose();
+                }
+                else if(checkBox2.isSelected()){
+                    System.out.println(2);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"You have to select an option before confirming!","ERROR",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+
+
+        JLabel jLabel = new JLabel();
+        jLabel.setText("YES I WOULD LIKE TO CONFIRM : !!");
+        jLabel.setFont(new Font("Consolas",Font.BOLD,20));
+        jLabel.setForeground(new Color(0x00FF00F));
+        jLabel.setBounds(0,300,500,20);
+        jFrame.add(checkBox1);
+        jFrame.add(checkBox2);
+        jFrame.add(jLabel);
+        jFrame.add(jButton);
+        jFrame.getContentPane().setForeground(new Color(0x00FF00F));
+        jFrame.getContentPane().setBackground(new Color(0x00));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource()==jButton){
+            System.out.println(1);
+        }
+
+    }
+}
+
+class Park implements ActionListener{
+
+    JFrame jFrame = new JFrame();
+
+
+    Park(){
+        jFrame.setLayout(new FlowLayout());
+        jFrame.getContentPane().setBackground(new Color(0x0));
+        jFrame.setTitle("PARKING VEHICLE");
+        jFrame.setSize(700,300);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel jPanel1 = new JPanel();
+        jPanel1.setLayout(new FlowLayout());
+        JPanel jPanel2 = new JPanel();
+        JPanel jPanel3 = new JPanel();
+        JPanel jPanel4 = new JPanel();
+        JPanel jPanel5 = new JPanel();
+
+        ButtonGroup buttonGroup = new ButtonGroup();
+        JRadioButton car = new JRadioButton("CAR");
+        JRadioButton bike = new JRadioButton("BIKE");
+        JRadioButton hw = new JRadioButton("HEAVY VEHICLE");
+        buttonGroup.add(car);
+        buttonGroup.add(bike);
+        buttonGroup.add(hw);
+        car.setFont(new Font("Consolas",Font.BOLD,20));
+        car.setForeground(new Color(0x00FF00));
+        car.setBackground(Color.BLACK);
+        car.setOpaque(true);
+        car.setFocusable(false);
+        bike.setFont(new Font("Consolas",Font.BOLD,20));
+        bike.setForeground(new Color(0x00FF00));
+        bike.setBackground(Color.BLACK);
+        bike.setOpaque(true);
+        bike.setFocusable(false);
+        hw.setFont(new Font("Consolas",Font.BOLD,20));
+        hw.setForeground(new Color(0x00FF00));
+        hw.setBackground(Color.BLACK);
+        hw.setOpaque(true);
+        hw.setFocusable(false);
+
+        JLabel jLabel1 = new JLabel("TYPE OF VEHICLE : ");
+        jLabel1.setFont(new Font("Consolas",Font.BOLD,20));
+        jLabel1.setForeground(new Color(0x00FF00));
+        jLabel1.setBackground(Color.BLACK);
+        jLabel1.setOpaque(true);
+        jPanel2.setLayout(new FlowLayout());
+        jPanel2.add(jLabel1);
+        jPanel2.add(car);
+        jPanel2.add(bike);
+        jPanel2.add(hw);
+
+        JTextField jTextField1 = new JTextField("ENTER HERE");
+        JLabel label2 = new JLabel("CAR REG NO. : ");
+        jTextField1.setBackground(new Color(0));
+        jTextField1.setForeground(new Color(0x00FF00));
+        jTextField1.setCaretColor(new Color(0x00FF00));
+        jTextField1.setPreferredSize(new Dimension(250,30));
+        label2.setFont(new Font("Consolas",Font.BOLD,20));
+        label2.setForeground(new Color(0x00FF00));
+        label2.setBackground(Color.BLACK);
+        label2.setOpaque(true);
+        jPanel3.add(label2);
+        jPanel3.add(jTextField1);
+
+        JLabel jLabel7 = new JLabel("IS YOUR VEHICLE ELECTRIC ? : ");
+        jLabel7.setFont(new Font("Consolas",Font.BOLD,20));
+        jLabel7.setForeground(new Color(0x00FF00));
+        jLabel7.setBackground(Color.BLACK);
+        jLabel7.setOpaque(true);
+        JCheckBox jCheckBox = new JCheckBox();
+        ButtonGroup buttonGroup1 = new ButtonGroup();
+        JRadioButton yes = new JRadioButton("YES");
+        JRadioButton no = new JRadioButton("NO");
+        buttonGroup1.add(yes);
+        buttonGroup1.add(no);
+        jPanel4.add(jLabel7);
+        jPanel4.add(yes);
+        jPanel4.add(no);
+        yes.setFont(new Font("Consolas",Font.BOLD,20));
+        yes.setForeground(new Color(0x00FF00));
+        yes.setBackground(Color.BLACK);
+        yes.setOpaque(true);
+        yes.setFocusable(false);
+        no.setFont(new Font("Consolas",Font.BOLD,20));
+        no.setForeground(new Color(0x00FF00));
+        no.setBackground(Color.BLACK);
+        no.setOpaque(true);
+        no.setFocusable(false);
+
+        JLabel jLabel8 = new JLabel("DO YOU HAVE A HANDICAPPED PERSON ON BOARD ? : ");
+        jLabel8.setFont(new Font("Consolas",Font.BOLD,20));
+        jLabel8.setForeground(new Color(0x00FF00));
+        jLabel8.setBackground(Color.BLACK);
+        jLabel8.setOpaque(true);
+
+        ButtonGroup buttonGroup2 = new ButtonGroup();
+        JRadioButton yes1 = new JRadioButton("YES");
+        JRadioButton no1 = new JRadioButton("NO");
+        buttonGroup2.add(yes1);
+        buttonGroup2.add(no1);
+        jPanel5.add(jLabel8);
+        jPanel5.add(yes1);
+        jPanel5.add(no1);
+        yes1.setFont(new Font("Consolas",Font.BOLD,20));
+        yes1.setForeground(new Color(0x00FF00));
+        yes1.setBackground(Color.BLACK);
+        yes1.setOpaque(true);
+        yes1.setFocusable(false);
+        no1.setFont(new Font("Consolas",Font.BOLD,20));
+        no1.setForeground(new Color(0x00FF00));
+        no1.setBackground(Color.BLACK);
+        no1.setOpaque(true);
+        no1.setFocusable(false);
+
+        JButton jButton = new JButton("CONFIRM");
+        jButton.setBackground(Color.BLACK);
+        jButton.setForeground(Color.green);
+        jButton.setFocusable(false);
+        JPanel p = new JPanel();
+        p.add(jButton);
+        jButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(jTextField1.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Please enter a valid Reg. No.","ERR",JOptionPane.ERROR_MESSAGE);
+                }
+                else if(!(car.isSelected()||bike.isSelected()||hw.isSelected())){
+                    JOptionPane.showMessageDialog(null,"Please select a vehicle!","ERR",JOptionPane.ERROR_MESSAGE);
+                }
+                else if(!(yes.isSelected()||no.isSelected()))
+                {
+                    JOptionPane.showMessageDialog(null,"Is your vehicle electric?","ERR",JOptionPane.ERROR_MESSAGE);
+                }
+                else if(!(yes1.isSelected()||no1.isSelected()))
+                {
+                    JOptionPane.showMessageDialog(null,"Do you have a handicapped person on board?","ERR",JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    int k = JOptionPane.showConfirmDialog(null,"Do you wish to proceed to payment?","PROCED",JOptionPane.INFORMATION_MESSAGE);
+                    if(k==0){
+                        jFrame.dispose();
+                        Payment payment = new Payment();
+                    }
+
+                }
+            }
+        });
+
+
+        jFrame.add(jPanel2);
+        jFrame.add(jPanel3);
+        jFrame.add(jPanel4);
+        jFrame.add(jPanel5);
+        jFrame.add(p);
+        jFrame.setVisible(true);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+}
+
+class Payment implements ActionListener{
+    JFrame jFrame;
+    Payment(){
+        jFrame = new JFrame();
+        jFrame.setLayout(new FlowLayout());
+        jFrame.getContentPane().setBackground(new Color(0x0));
+        jFrame.setTitle("SUCCESSFUL");
+        jFrame.setSize(600,600);
+        jFrame.setResizable(false);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel jPanel1 = new JPanel();
+        JPanel jPanel2 = new JPanel();
+        JPanel jPanel3 = new JPanel();
+
+        JLabel jLabel = new JLabel("SPOT ALLOTED");
+        jLabel.setFont(new Font("Consolas",Font.BOLD,20));
+        jLabel.setForeground(new Color(0x00FF00));
+        jLabel.setBackground(Color.BLACK);
+        jLabel.setOpaque(true);
+
+        JLabel jLabel1 = new JLabel("SPOT NO. :");
+        jLabel1.setFont(new Font("Consolas",Font.BOLD,20));
+        jLabel1.setForeground(new Color(0x00FF00));
+        jLabel1.setBackground(Color.BLACK);
+        jLabel1.setOpaque(true);
+
+        JLabel jLabel2 = new JLabel("THANK YOU!!!!");
+        jLabel2.setFont(new Font("Consolas",Font.BOLD,20));
+        jLabel2.setForeground(new Color(0x00FF00));
+        jLabel2.setBackground(Color.BLACK);
+        jLabel2.setOpaque(true);
+
+        jPanel1.setBackground(Color.BLACK);
+        jPanel1.setPreferredSize(new Dimension(500,30));
+        jPanel2.setBackground(Color.BLACK);
+        jPanel2.setPreferredSize(new Dimension(500,30));
+        jPanel3.setBackground(Color.BLACK);
+        jPanel3.setPreferredSize(new Dimension(500,30));
+        jPanel1.add(jLabel);
+        jPanel2.add(jLabel1);
+        jPanel3.add(jLabel2);
+        JButton jButton = new JButton("MAIN PAGE");
+        jButton.setFont(new Font("Consolas",Font.BOLD,20));
+        jButton.setBackground(new Color(0x3ADED2));
+        jButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jFrame.dispose();
+                MyFrame myFrame = new MyFrame();
+            }
+        });
+
+
+        jFrame.add(jPanel1);
+        jFrame.add(jPanel2);
+        jFrame.add(jPanel3);
+        jFrame.add(jButton);
+        jFrame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+}
+
+class Unpark implements ActionListener{
+
+    JFrame jFrame;
+    Unpark(){
+        jFrame.setLayout(new FlowLayout());
+        jFrame.getContentPane().setBackground(new Color(0x0));
+        jFrame.setTitle("UNPARKING VEHICLE");
+        jFrame.setSize(700,300);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextField jTextField1 = new JTextField("ENTER HERE");
+        JLabel label2 = new JLabel("CAR REG NO. : ");
+        jTextField1.setBackground(new Color(0));
+        jTextField1.setForeground(new Color(0x00FF00));
+        jTextField1.setCaretColor(new Color(0x00FF00));
+        jTextField1.setPreferredSize(new Dimension(250,30));
+
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+}
+
