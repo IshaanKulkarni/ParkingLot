@@ -1,3 +1,6 @@
+// Parking lot program created by Team 12
+// Members: Ishaan,Abhijit,Niheeth,Prasanna and Pavan
+
 import java.util.*;
 import java.sql.Timestamp;
 public class parkinglot{
@@ -507,6 +510,12 @@ public class parkinglot{
 
     }
 }
+// This interface acts as the skeleton for each floor. Every vehicle has been awarded a single floor. Seperate spots and functions exist for Handicapped Drivers.
+// Timestamp class has been used to denote parking and unparking times.
+// Electric vehicles have additional fares for charging their vehicles.
+// class Heavy represents the class of heavy vehicles like trucks!
+
+
 interface Floor{
     public int Park(String s);
     public int HandicappedPark(String s);
@@ -516,6 +525,8 @@ interface Floor{
     public long Caluclate(int i);
     public long HandicappedCaluclate(int i);
 }
+
+
 
 class Bike implements Floor{
     Timestamp time =new Timestamp(0);
